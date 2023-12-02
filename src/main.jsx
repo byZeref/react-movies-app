@@ -1,9 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import './assets/css/water-dark.css'
+import './assets/css/index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const app = ReactDOM.createRoot(document.getElementById('root'))
+
+app.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
