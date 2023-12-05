@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Movie } from './components/Movie'
 import { fetchMovies } from './services/movies'
 
 function App() {
+  const initial = useRef(true) // <--- initial render
+  const timeout = useRef(null)
+  const prevSearch = useRef('')
   const [ searching, setSearching ] = useState(false)
   const [ search, setSearch ] = useState('')
   const [ results, setResults ] = useState([])
@@ -22,13 +25,25 @@ function App() {
 
     setResults(movies)
     setSearching(false)
+    prevSearch.current = search
   }
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    if (!search) return
+    if (!search || search === prevSearch.current) return
     return searchMovies()
   }
+
+  
+  useEffect(() => {
+    if (initial.current && !search) return
+    initial.current = false
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      console.log('effect');
+      searchMovies()
+    }, 1000)
+  }, [search])
 
   return (
     <div className='main-container'>
