@@ -324,7 +324,7 @@ input[type='button'] {
   padding-left: 30px;
 }
 
-button:hover {
+button:not([aria-label='close']):hover {
   background: #040a0f;
   background: var(--button-hover);
 }
