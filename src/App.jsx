@@ -1,9 +1,11 @@
 import { Movie } from './components/Movie'
 import { ToastContainer } from 'react-toastify';
 import { useMovies } from './hooks/movies'
+import { useState } from 'react';
 
 function App() {
-  const { results, search, setSearch, prevSearch, searching, searchMovies } = useMovies()
+  const [search, setSearch] = useState('')
+  const { results, searching, searchMovies } = useMovies(search)
   const btnText = searching
     ? <img style={{width: '20px'}} src='/public/loading.svg' />
     : <span>Buscar</span>
@@ -17,8 +19,7 @@ function App() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    if (!search || search === prevSearch.current) return
-    return searchMovies(ev.target.value, prevSearch)
+    return searchMovies()
   }
 
   return (
