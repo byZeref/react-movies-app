@@ -7,7 +7,7 @@ function App() {
   const [search, setSearch] = useState('')
   const { results, searching, searchMovies } = useMovies(search)
   const btnText = searching
-    ? <img style={{width: '20px'}} src='/public/loading.svg' />
+    ? <img style={{width: '20px'}} src='/loading.svg' />
     : <span>Buscar</span>
 
   
